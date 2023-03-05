@@ -3,16 +3,42 @@
 @tailwind utilities;
 
 body {
-  color: white;
-  overflow: hidden;
+  @apply bg-slate-800 font-catamaran text-white overflow-x-hidden;
 }
 
-.link {
-}
 .link::after {
   @apply content-[''] bg-orange-500 h-[3px] w-[0%] left-0 -bottom-[5px] rounded-xl absolute duration-300;
 }
 
 .link::hover::after {
   @apply w-[100%];
+}
+.block-left {
+  @apply fixed sm:-left-[30%] -left-[90%] sm:-top-[25%] -top-[10%] bg-slate-700 w-full h-[110vh] -rotate-45  overflow-hidden;
+}
+.block-right {
+  @apply fixed sm:-right-[30%] -right-[95%] sm:-bottom-[25%] -bottom-[15%] bg-slate-500 w-full h-[110vh] -rotate-45 overflow-hidden;
+}
+.inner-left {
+  @apply absolute sm:left-0 sm:top-[25%] left-[25%] top-[40%]  h-full w-full hover:bg-slate-50 rotate-45;
+}
+.inner-right {
+  @apply absolute sm:left-0  sm:-top-[25%] -left-[15%] -top-[50%]  h-full w-full hover:bg-slate-50 rotate-45;
+}
+
+.shadow-hover {
+  @apply transform hover:translate-x-10 hover:shadow-inner-large duration-300;
+}
+
+@layer utilities {
+  .weird-width {
+    width: 50%;
+    width: calc(50% + 2rem);
+  }
+  .text-shadow {
+    text-shadow: 4px 4px 33px rgba(0, 0, 0, 1);
+  }
+  .no-shadow {
+    text-shadow: none;
+  }
 }
