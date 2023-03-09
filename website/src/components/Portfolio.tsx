@@ -35,7 +35,7 @@ const items = [
   },
   {
     title: "Malaria Detection",
-    data: ["Python", "Conv. Neural Netwrk", "Jupyter", "Matplot"],
+    data: ["Python", "Conv. Neural Netwrk", "Jupyter Notebook", "Tensorflow"],
     description:
       "Using Python and Convolutional Neural Networks, I trained a model to detect blood cells which were parasitized with Malaria.",
     image: {

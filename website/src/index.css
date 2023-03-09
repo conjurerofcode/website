@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-  @apply bg-slate-800 font-catamaran text-white overflow-x-hidden;
+  @apply bg-slate-800 font-catamaran text-white overflow-x-hidden m-0 p-0;
 }
 
 .link::after {
@@ -13,24 +13,9 @@ body {
 .link::hover::after {
   @apply w-[100%];
 }
-.block-left {
-  @apply sm:fixed sm:-left-[30%]  sm:-top-[25%]  bg-slate-700 sm:w-full w-screen sm:h-[110vh] h-1/2 sm:-rotate-45  overflow-hidden transition-all duration-300;
-}
-.block-right {
-  @apply sm:fixed sm:-right-[30%]  sm:-bottom-[25%] bg-slate-500 sm:w-full w-screen sm:h-[110vh] h-1/2 sm:-rotate-45 overflow-hidden transition-all duration-300;
-}
-.inner-left {
-  @apply sm:absolute sm:left-0 sm:top-[25%]   h-full w-full hover:bg-slate-50 sm:rotate-45 bg-contain;
-}
-.inner-right {
-  @apply sm:absolute sm:left-0  sm:-top-[25%]   h-full w-full  hover:bg-slate-50 sm:rotate-45 bg-contain;
-}
 
-.shadow-hover {
-  @apply transform hover:translate-x-10 hover:shadow-inner-large duration-300;
-}
 .stagger-children > :nth-child(odd) {
-  @apply bg-slate-600  group-hover:-translate-x-[105%];
+  @apply bg-slate-600  -translate-x-[105%];
 }
 
 .underline-animation {
@@ -38,16 +23,10 @@ body {
 }
 
 @layer utilities {
-  .weird-width {
-    width: 50%;
-    width: calc(50% + 2rem);
-  }
   .text-shadow {
     text-shadow: 3px 3px 3px rgba(0, 0, 0, 1);
   }
   .no-shadow {
     text-shadow: none;
-  }
-  .stagger-children {
   }
 }

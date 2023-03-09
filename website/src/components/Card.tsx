@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
-
+import texture from "../assets/texture-1.png";
 import BlurImage from "./BlurImage";
 
 interface CardProps {
@@ -41,9 +41,10 @@ function Card({ props }: { props: CardProps }) {
         visible: { opacity: 1, scale: 1 },
       }}
       transition={{ delay: 0.15 }}
+      style={{ backgroundImage: `url(${texture})`, backgroundRepeat: "repeat" }}
     >
-      <div className="m-2 h-full min-h-[30vh] max-h-[20vh] w-[48%] bg-slate-400 rounded-lg duration-300 group-hover:translate-x-[105%] flex flex-row items-center justify-center ">
-        {img && <BlurImage src={img} base64={base} isCard={true} />}
+      <div className="m-2 h-full min-h-[30vh] sm:max-h-[20vh] w-[48%] bg-slate-400 rounded-lg duration-300 group-hover:translate-x-[105%] flex flex-row items-center justify-center ">
+        {props.image && <BlurImage src={img} base64={base} isCard={true} />}
         <h1 className="absolute sm:text-5xl text-3xl text-shadow">{title}</h1>
       </div>
       <div className="flex flex-col gap-y-10 p-5 sm:text-2xl text-lg transition-all duration-300  opacity-0 absolute m-2 h-[85%] min-h-[30vh] w-[48%] bg-slate-400 rounded-lg group-hover:block group-hover:opacity-100 scale-x-0 group-hover:scale-x-100 -translate-x-[50%] group-hover:translate-x-0 left-2 top-2 items-center justify-center">
@@ -57,28 +58,28 @@ function Card({ props }: { props: CardProps }) {
         )}
         {description && <p className="text-lg m-5">{description}</p>}
       </div>
-      <div className=" m-2 rounded-lg h-[95%] min-h-[30vh] w-[48%] bg-slate-400 opacity-100 duration-300 group-hover:opacity-0 group-hover:scale-x-0 group-hover:translate-x-[50%] flex flex-col flex-end items-center align-bottom ">
-        {props.data.map((lang, idx) => (
-          <motion.div
-            viewport={{ once: true }}
-            className=" bg-slate-700 min-h-[4vh] items-center text-center sm:text-2xl text-md justify-center flex m-1 rounded-lg "
-            initial="hidden"
-            whileInView="visible"
-            variants={{
-              hidden: { rotate: 45, translateY: -100, scale: 0.2 },
-              visible: { rotate: 0, translateY: 0, scale: 1 },
-            }}
-            transition={{ delay: 0.15 + idx * 0.05 }}
-            style={{
-              width: `${98 / (idx + 1)}%`,
-              bottom: `${Math.max(4 * idx, idx * count)}rem`,
-              height: `${75 * (1 / count)}%`,
-            }}
-            key={idx}
-          >
-            {lang}
-          </motion.div>
-        ))}
+      <div className="flex justify-center items-center  m-2 rounded-lg h-[95%] min-h-[30vh] w-[48%] bg-slate-400 opacity-100 duration-300 group-hover:opacity-0 group-hover:scale-x-0 group-hover:translate-x-[50%] ">
+        {props.data.map((lang, idx) => {
+          const isEven = idx % 2 == 0;
+          const offset = isEven ? "mt-10" : "mb-10";
+
+          return (
+            <motion.div
+              viewport={{ once: true }}
+              className={` bg-slate-700 transform ${offset} min-h-[5vh] min-w-[7vw] items-center text-center sm:text-2xl text-md justify-center flex m-1 rounded-lg `}
+              initial="hidden"
+              whileInView="visible"
+              variants={{
+                hidden: { rotate: 45, translateY: -100, scale: 0.2 },
+                visible: { rotate: 0, translateY: 0, scale: 1 },
+              }}
+              transition={{ delay: 0.15 + idx * 0.05 }}
+              key={idx}
+            >
+              {lang}
+            </motion.div>
+          );
+        })}
       </div>
     </motion.div>
   );
