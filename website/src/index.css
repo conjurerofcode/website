@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-  @apply bg-slate-800 font-catamaran text-white overflow-x-hidden m-0 p-0;
+  @apply bg-primary font-satoshi text-white overflow-x-hidden m-0 p-0;
 }
 
 .link::after {
@@ -28,5 +28,19 @@ body {
   }
   .no-shadow {
     text-shadow: none;
+  }
+  .text-glow {
+    text-shadow: rgba(255, 255, 255, 0.5) 0px 0px 15px;
+  }
+  .text-glow-none {
+    text-shadow: none;
+  }
+  .fade-right {
+    background: rgb(34, 34, 34);
+    background: linear-gradient(
+      90deg,
+      rgba(34, 34, 34, 0) 20%,
+      rgba(59, 97, 107, 1) 72%
+    );
   }
 }
