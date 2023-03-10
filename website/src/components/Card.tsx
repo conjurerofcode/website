@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import texture from "../assets/texture-1.png";
+import concrete from "../assets/texture-concrete.png";
+import grain from "../assets/texture-1.png";
 import BlurImage from "./BlurImage";
 
 interface CardProps {
@@ -28,17 +30,6 @@ function Card({ props }: { props: CardProps }) {
   let base = "";
 
   const [isHovered, setIsHovered] = useState(false);
-  const [mousePos, setMousePos] = useState({ left: 0, top: 0 });
-
-  useEffect(() => {
-    document.addEventListener("mousemove", (e) => {
-      setMousePos({
-        left: e.pageX,
-        top: e.pageY,
-      });
-    });
-    return () => document.removeEventListener("mousemove", () => {});
-  }, []);
 
   if (props.image) {
     img = props.image.src;
@@ -62,7 +53,10 @@ function Card({ props }: { props: CardProps }) {
           scale: isHovered ? 1.2 : 1,
         },
       }}
-      transition={{ ease: "anticipate", duration: 0.8 }}
+      transition={{
+        delayChildren: 1,
+        staggerChildren: 0.9,
+      }}
       onMouseEnter={() => setIsHovered((prev) => true)}
       onMouseLeave={() => setIsHovered((prev) => false)}
     >
@@ -72,27 +66,45 @@ function Card({ props }: { props: CardProps }) {
           {title}
         </h1>
       </div>
+      <div className="absolute top-0 left-0 w-full h-full flex justify-center items-center text-center">
+        <motion.div
+          initial="hidden"
+          animate={isHovered ? "visible" : "hidden"}
+          variants={{
+            hidden: { scale: 0 },
+            visible: { scale: 1 },
+          }}
+          className="relative h-[85%] w-[90%] bg-secondary rounded-lg flex items-center flex-col justify-center p-5"
+        >
+          {description}
+          {link && (
+            <a className="mt-5 underline hover:text-orange-400" href={link}>
+              Link to Project
+            </a>
+          )}
+        </motion.div>
+      </div>
 
       <motion.div
         className="absolute -bottom-[4vh]  flex flex-row justify-center w-full items-center pointer-events-none space-around"
         animate={isHovered ? "visible" : "hidden"}
         variants={{
-          hidden: { scale: 0, opacity: 0, rotate: 15 },
-          visible: { scale: 1, opacity: 1, rotate: 0 },
+          hidden: { scale: 0, opacity: 0 },
+          visible: { scale: 1, opacity: 1 },
         }}
-
-        // style={{
-        //   position: "absolute",
-        //   left: mousePos.left - 30,
-        //   top: mousePos.top,
-        // }}
+        transition={{ delayChildren: 0.5, staggerChildren: 0.9 }}
       >
         {props.data.map((lang, idx) => {
-          const offsetY = randomNumber(-5, 5);
-          const offsetX = randomNumber(-3, 3);
+          // const offsetY = randomNumber(-5, 5);
+          // const offsetX = randomNumber(-3, 3);
 
           return (
             <motion.div
+              animate={isHovered ? "visible" : "hidden"}
+              variants={{
+                hidden: { rotate: 90 },
+                visible: { rotate: 0 },
+              }}
               className={`m-2 pointer-events-none h-[40px]  rounded-3xl break-words text-center transform`}
             >
               {lang}
@@ -100,11 +112,10 @@ function Card({ props }: { props: CardProps }) {
           );
         })}
       </motion.div>
-
-      {/* <div className="flex justify-center items-center  m-2 rounded-lg h-[95%] min-h-[30vh] w-[48%] bg-slate-400 opacity-100 duration-300 group-hover:opacity-0 group-hover:scale-x-0 group-hover:translate-x-[50%] "></div> */}
     </motion.div>
   );
 }
+// {/* <div className="flex justify-center items-center  m-2 rounded-lg h-[95%] min-h-[30vh] w-[48%] bg-slate-400 opacity-100 duration-300 group-hover:opacity-0 group-hover:scale-x-0 group-hover:translate-x-[50%] "></div> */}
 // {props.data.map((lang, idx) => {
 //         const isEven = idx % 2 == 0;
 //         const offset = isEven ? "mt-10" : "mb-10";

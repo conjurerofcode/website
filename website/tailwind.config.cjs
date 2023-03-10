@@ -5,8 +5,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: "#2f444b",
-        secondary: "#283a40",
+        primary: "#c9bdae",
+        secondary: "#766c66",
       },
 
       keyframes: {
@@ -18,12 +18,20 @@ module.exports = {
             transform: "translateX(100px) scale(1.25)",
           },
         },
+        "pan-small": {
+          "0%": {
+            transform: "translateX(0px) scale(1.25)",
+          },
+          "100%": {
+            transform: "translateX(50px) scale(1.25)",
+          },
+        },
         float: {
           "0%": {
-            transform: "translateY(0) translateX(0)",
+            transform: "translateY(25%) translateX(0)",
           },
           "25%": {
-            transform: "translateY(-50%) translateX(50%)",
+            transform: "translateY(-50%) translateX(100%)",
           },
           "75%": {
             transform: "translateY(-100%) translateX(-50%)",
@@ -35,6 +43,7 @@ module.exports = {
       },
       animation: {
         pan: "pan 50s linear 0s infinite alternate",
+        "pan-small": "pan-small 30s linear 0s infinite alternate",
         float: "float 10s linear 0s infinite",
       },
       fontFamily: {

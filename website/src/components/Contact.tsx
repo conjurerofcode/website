@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function About() {
+function Contact() {
   return (
     <div className=" h-screen w-screen bg-primary overflow-hidden pt-[100px]">
       <h2>About</h2>
@@ -10,4 +10,4 @@ function About() {
   );
 }
 
-export default About;
+export default Contact;

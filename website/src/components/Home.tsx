@@ -1,46 +1,52 @@
 import { useEffect, useState } from "react";
-import work from "../assets/work.jpg"; // Photo by Andrew Neel on Unsplash
-import play from "../assets/play.jpg";
-import grid from "../assets/texture-grid.png";
-import geo from "../assets/texture-geo.png";
-import grain from "../assets/texture-1.png";
-import squares from "../assets/texture-cubes.png";
 
+import squiggles from "../assets/texture-squiggle.png";
 import selfie from "../assets/selfie.jpg";
-import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
+
+import substack from "../assets/icons/substack.png";
+import git from "../assets/icons/github.png";
+import linked from "../assets/icons/linked.png";
+import selfie3 from "../assets/selfie-3.jpg";
+import selfie4 from "../assets/selfie-4.jpg";
+
+import { AnimatePresence, motion } from "framer-motion";
 import BlurImage from "./BlurImage";
 
+function randomNumber(min: number, max: number) {
+  return Math.floor(Math.random() * (max - min) + min);
+}
+const blog = {
+  icon: substack,
+  url: "https://notthatmichaelmoore.substack.com/",
+};
+const github = {
+  icon: git,
+  url: "https://github.com/conjurerofcode",
+};
+const link = {
+  icon: linked,
+  url: "https://www.linkedin.com/in/conjurerofcode/",
+};
+
 function Home() {
-  const work64 = import.meta.env.VITE_WORK_64;
-  const play64 = import.meta.env.VITE_PLAY_64;
+  const bgs = [selfie, selfie3];
   const selfie64 = import.meta.env.VITE_SELFIE_64;
-
-  const same = `transform duration-300  sm:h-[50vh] sm:w-[45vw] h-[30vh] w-[80vw] m-10 rounded-lg `;
-  const [bg, setBg] = useState<string>(grain);
-
-  // const [index, setIndex] = useState(0)
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //       setIndex(index + 1)
-  //     }, 5000)
-
-  //   return (() => clearInterval(interval)) //This is a cleanup function
-  // })
+  const icons = [blog, github, link];
 
   return (
-    <motion.div className="sm:pt-10 pt-[20vh] relative w-screen sm:h-screen h-full overflow-hidden flex sm:flex-row flex-col justify-start px-20 items-center">
-      <div className="relative  overflow-hidden fade-right rounded-lg mx-10 sm:w-1/2 w-[80vw]">
-        <BlurImage src={selfie} base64={selfie64} />
+    <motion.div className=" pt-[12vh] relative w-screen sm:h-screen h-full overflow-x-hidden sm:overflow-hidden flex sm:flex-row flex-col justify-start items-center  sm:items-center ">
+      <div className="relative  overflow-hidden rounded-xl sm:ml-10 sm:w-1/3 w-full sm:h-[75vh] h-[50vh] ">
+        <BlurImage src={selfie4} base64={selfie64} style={""} />
       </div>
-
       <motion.div
-        className=" h-2/3 sm:w-1/2 w-[80vw] bg-secondary rounded-lg p-10  m-10"
+        className=" h-2/3 sm:w-1/2 w-[95vw]  rounded-lg sm:mt-[60vh]  sm:mx-5"
         initial={{ scaleY: 0 }}
         animate={{ scaleY: 1 }}
       >
-        <h1 className="text-3xl ">Hey, welcome.</h1>
-        <p>
+        <h1 className="sm:text-5xl text-3xl font-bold sm:text-start text-center sm:mt-0 mt-5">
+          Hey, I'm Michael.
+        </h1>
+        <p className="m-0 p-8 sm:p-0 sm:translate-y-0 -translate-y-10">
           <br></br>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Turpis
@@ -59,27 +65,45 @@ function Home() {
           donec ac odio tempor. Faucibus nisl tincidunt eget nullam. Vulputate
           mi sit amet mauris commodo quis imperdiet massa tincidunt. Suspendisse
           in est ante in nibh mauris. Sagittis purus sit amet volutpat consequat
-          mauris nunc. Enim nunc faucibus a pellentesque sit. Arcu dui vivamus
-          arcu felis bibendum ut tristique et. Id cursus metus aliquam eleifend.
-          Euismod lacinia at quis risus. Felis imperdiet proin fermentum leo vel
-          orci porta. In fermentum posuere urna nec tincidunt. Turpis egestas
-          sed tempus urna et pharetra pharetra massa. Non consectetur a erat nam
-          at lectus.
+          mauris nunc.
         </p>
       </motion.div>
+      <div className="absolute  sm:w-[10vw] sm:h-[35vh] sm:left-[80%] sm:top-[15%] w-2/3 h-[2vh] -bottom-10 flex sm:flex-col justify-center items-center">
+        {icons.map(({ icon, url }) => {
+          return <Icon src={icon} link={url} />;
+        })}
+      </div>
+
+      <div
+        className="absolute top-0 left-0 h-[100%] w-[100%] transform scale-1 duration-300 sm:animate-pan animate-pan-small -z-10"
+        style={{
+          backgroundImage: `url(${squiggles})`,
+          backgroundRepeat: "repeat",
+          backgroundPosition: "center",
+        }}
+      ></div>
     </motion.div>
   );
 }
 
 export default Home;
+
+const Icon = ({ src, link }: { src: string; link?: string }) => {
+  return (
+    <a
+      href={link}
+      target="_blank"
+      className="h-[5vh] w-[5vh]  m-2 transform duration-300 hover:scale-125 "
+      style={{ backgroundImage: `url(${src})`, backgroundSize: "contain" }}
+    ></a>
+  );
+};
 // , שלום, 你好, Hola
 {
-  /* <div
-        className="absolute top-0 left-0 h-[100%] w-[100%] transform scale-1.3 duration-300 animate-pan"
-        style={{ backgroundImage: `url(${bg})`, backgroundRepeat: "repeat" }}
-      ></div> */
 }
-
+// sandy #c9bdae
+// Old Tan #a0928a
+// Green #636b58
 // Old index.css
 // .block-left {
 //   @apply sm:fixed sm:-left-[30%]  sm:-top-[25%]  bg-slate-700 sm:w-full w-screen sm:h-[110vh] h-1/2 sm:-rotate-45  overflow-hidden transition-all duration-300;
